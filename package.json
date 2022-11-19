@@ -1,0 +1,73 @@
+{
+  "name": "@seung-ju/react-hooks",
+  "version": "0.0.1",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.mjs",
+  "umd:main": "dist/index.umd.js",
+  "unpkg": "dist/index.umd.js",
+  "jsdelivr": "dist/index.umd.js",
+  "jsnext:main": "dist/index.esm.mjs",
+  "source": "src/index.ts",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.esm.mjs",
+      "require": "./dist/index.cjs.js"
+    }
+  },
+  "repository": "https://github.com/kingsky32/react-hooks.git",
+  "author": "Seung Ju <kingsky32@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf dist",
+    "prebuild": "yarn clean",
+    "build": "yarn build:modern",
+    "prettier:fix": "prettier --config .prettierrc --write \"**/*.{js,ts,tsx,css}\"",
+    "lint": "eslint \"**/*.{js,ts,tsx}\"",
+    "lint:fix": "yarn lint -- --fix",
+    "type": "tsc --noEmit",
+    "prepare": "node -e \"if (process.env.NODE_ENV !== 'production'){process.exit(1)} \" || husky install",
+    "prepublishOnly": "yarn && yarn lint:fix && yarn type && yarn build"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.25",
+    "@typescript-eslint/eslint-plugin": "^5.43.0",
+    "@typescript-eslint/parser": "^5.43.0",
+    "eslint": "^8.28.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.11",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1",
+    "react": "^18.2.0",
+    "typescript": "^4.9.3"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17 || ^18"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "yarn lint:fix",
+      "yarn prettier:fix"
+    ],
+    "*.{md,json,yml}": [
+      "prettier --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "engines": {
+    "node": ">=12.22.0"
+  },
+  "packageManager": "yarn@1.22.15"
+}
